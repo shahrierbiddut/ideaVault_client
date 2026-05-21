@@ -1,36 +1,172 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# IdeaVault Client
 
-## Getting Started
+Frontend for IdeaVault, a startup idea sharing platform where users can publish ideas, discover trending concepts, comment, interact, and manage their personal profile.
 
-First, run the development server:
+## Live URLs
+
+- Frontend: add your deployed frontend URL
+- Backend API: add your deployed backend URL
+
+## Key Features
+
+- JWT-based authentication (register, login, logout, session restore)
+- Google login integration through Firebase
+- Protected routes for authenticated user actions
+- Browse ideas with search, filtering, sorting, and pagination
+- Add idea workflow and personal dashboard pages
+- Comment and interaction features (like, bookmark, comment activity)
+- Profile update and password change support
+- Responsive UI with loading states and motion transitions
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- React 19
+- Axios
+- Firebase Client SDK
+- HeroUI
+- Tailwind CSS 4
+- Framer Motion
+- React Hot Toast
+
+## Project Structure
+
+```txt
+client/
+├── src/
+│   ├── app/
+│   │   ├── page.js
+│   │   ├── ideas/
+│   │   ├── add-idea/
+│   │   ├── my-ideas/
+│   │   ├── my-interactions/
+│   │   ├── profile/
+│   │   ├── login/
+│   │   └── register/
+│   ├── components/
+│   ├── context/
+│   └── lib/
+├── middleware.js
+└── package.json
+```
+
+## Prerequisites
+
+- Node.js 18 or newer
+- npm or pnpm
+- Running IdeaVault backend server
+
+## Environment Variables
+
+Create `.env.local` inside `client`:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+```
+
+## Installation
+
+```bash
+npm install
+```
+
+or
+
+```bash
+pnpm install
+```
+
+## Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+App runs at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - start development server
+- `npm run build` - build for production
+- `npm run start` - run production build
+- `npm run lint` - run ESLint
+- `npm run guard:jsx` - check JSX corruption guard script
 
-## Learn More
+## Backend API Contracts Used by Client
 
-To learn more about Next.js, take a look at the following resources:
+### Auth
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- POST `/auth/register`
+- POST `/auth/login`
+- POST `/auth/google`
+- GET `/auth/me`
+- POST `/auth/logout`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Users
 
-## Deploy on Vercel
+- GET `/users/profile`
+- PUT `/users/profile`
+- POST `/users/change-password`
+- DELETE `/users/profile`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Ideas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- GET `/ideas`
+- GET `/ideas/trending`
+- GET `/ideas/:id`
+- GET `/ideas/my-ideas/:email`
+- POST `/ideas`
+- PATCH `/ideas/:id`
+- DELETE `/ideas/:id`
+
+### Comments
+
+- GET `/comments/:ideaId`
+- POST `/comments`
+- PATCH `/comments/:id`
+- DELETE `/comments/:id`
+
+### Interactions
+
+- GET `/interactions/:email`
+- POST `/interactions`
+
+### Public
+
+- GET `/public/home-content`
+
+## Verification Checklist
+
+Run these before deployment:
+
+```bash
+npm run guard:jsx
+npm run lint
+npm run build
+```
+
+Manual checks:
+
+- Login and register flow
+- Google login flow
+- Protected route redirects
+- Add idea and my ideas flow
+- Comments and interactions flow
+- Session expiry handling
+
+## Deployment Notes
+
+- Set all `NEXT_PUBLIC_*` variables in your frontend host.
+- Ensure backend CORS includes your frontend origin.
+- Ensure backend API URL is set correctly in `NEXT_PUBLIC_API_URL`.
+
+## Troubleshooting
+
+- If API calls fail, verify backend is running and CORS is configured.
+- If Google login fails, verify all Firebase env values.
+- If protected routes misbehave, check token presence in local storage and backend token validation.
