@@ -16,4 +16,17 @@ apiClient.interceptors.request.use((config) => {
     return config;
 });
 
+apiClient.interceptors.response.use(
+    (response) => {
+        if (response.config.url && response.config.url.includes('/public/home-content')) {
+            console.log("Axios response interceptor - home-content:", JSON.stringify(response.data).substring(0, 300));
+        }
+        return response;
+    },
+    (error) => {
+        console.log("Axios error:", error.message);
+        return Promise.reject(error);
+    }
+);
+
 export default apiClient;
