@@ -24,8 +24,9 @@ export default function TrendingIdeasSection({ compact = false }) {
         if (mounted) {
           setTrending(response?.data?.data || []);
         }
-      } catch {
+      } catch (error) {
         if (mounted) {
+          console.error("Failed to load trending ideas:", error);
           setTrending([]);
         }
       } finally {
@@ -58,7 +59,7 @@ export default function TrendingIdeasSection({ compact = false }) {
                   <IdeaThumbnail
                     title={idea.title}
                     imageURL={idea.imageURL}
-                    className="relative h-20 rounded-lg bg-gradient-to-br from-violet-500/40 to-cyan-500/30"
+                    className="relative h-20 rounded-lg bg-linear-to-br from-violet-500/40 to-cyan-500/30"
                     sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 16vw"
                   />
                   <div className="flex flex-1 flex-col">

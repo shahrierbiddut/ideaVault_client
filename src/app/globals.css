@@ -162,6 +162,10 @@ body {
 
 .btn-primary,
 .btn-secondary,
+<<<<<<< HEAD
+.btn-danger,
+=======
+>>>>>>> 5d92f019daa869af3ad776687834343031034445
 .btn-ghost,
 .icon-btn,
 .menu-item,
@@ -205,6 +209,23 @@ body {
     color: var(--text-primary);
 }
 
+<<<<<<< HEAD
+.btn-danger {
+    justify-content: center;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, var(--color-danger), #e11d48);
+    color: #ffffff;
+    box-shadow: 0 14px 28px rgba(244, 63, 94, 0.26);
+    padding: 0.58rem 1rem;
+}
+
+.btn-danger:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 34px rgba(244, 63, 94, 0.34);
+}
+
+=======
+>>>>>>> 5d92f019daa869af3ad776687834343031034445
 .btn-ghost {
     justify-content: center;
     border: 1px solid transparent;
@@ -217,6 +238,25 @@ body {
     color: var(--text-primary);
 }
 
+<<<<<<< HEAD
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-danger:disabled,
+.btn-ghost:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary:disabled:hover,
+.btn-secondary:disabled:hover,
+.btn-danger:disabled:hover,
+.btn-ghost:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+=======
+>>>>>>> 5d92f019daa869af3ad776687834343031034445
 .icon-btn {
     height: 2.25rem;
     width: 2.25rem;

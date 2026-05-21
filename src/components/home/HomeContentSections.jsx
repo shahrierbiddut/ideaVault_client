@@ -33,7 +33,12 @@ export default function HomeContentSections() {
         setContent(data);
       } catch (err) {
         if (mounted) {
-          setError(err?.message || "Failed to load home content");
+          const isNetworkError = err?.message === "Network Error" || !err?.response;
+          const friendlyMessage = isNetworkError
+            ? "Unable to reach API server. Check NEXT_PUBLIC_API_URL, backend status, and CORS origin settings."
+            : err?.response?.data?.error || err?.message || "Failed to load home content";
+
+          setError(friendlyMessage);
           console.error("Error loading home content:", err);
         }
       } finally {

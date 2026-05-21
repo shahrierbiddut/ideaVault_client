@@ -119,8 +119,8 @@ export default function Navbar() {
                 </Link>
                 <button
                   className="menu-item flex w-full items-center gap-3 text-left text-rose-500 hover:bg-rose-500/10"
-                  onClick={() => {
-                    logout();
+                  onClick={async () => {
+                    await logout();
                     router.push("/");
                   }}
                   type="button"
@@ -211,8 +211,8 @@ export default function Navbar() {
                   <button
                     type="button"
                     className="menu-item block w-full rounded-lg text-left text-sm font-medium text-rose-500 hover:bg-rose-500/10"
-                    onClick={() => {
-                      logout();
+                    onClick={async () => {
+                      await logout();
                       setMobileOpen(false);
                       router.push("/");
                     }}
