@@ -162,10 +162,7 @@ body {
 
 .btn-primary,
 .btn-secondary,
-<<<<<<< HEAD
 .btn-danger,
-=======
->>>>>>> 5d92f019daa869af3ad776687834343031034445
 .btn-ghost,
 .icon-btn,
 .menu-item,
@@ -209,7 +206,6 @@ body {
     color: var(--text-primary);
 }
 
-<<<<<<< HEAD
 .btn-danger {
     justify-content: center;
     border: 1px solid transparent;
@@ -224,8 +220,6 @@ body {
     box-shadow: 0 16px 34px rgba(244, 63, 94, 0.34);
 }
 
-=======
->>>>>>> 5d92f019daa869af3ad776687834343031034445
 .btn-ghost {
     justify-content: center;
     border: 1px solid transparent;
@@ -238,7 +232,6 @@ body {
     color: var(--text-primary);
 }
 
-<<<<<<< HEAD
 .btn-primary:disabled,
 .btn-secondary:disabled,
 .btn-danger:disabled,
@@ -255,8 +248,6 @@ body {
     box-shadow: none;
 }
 
-=======
->>>>>>> 5d92f019daa869af3ad776687834343031034445
 .icon-btn {
     height: 2.25rem;
     width: 2.25rem;

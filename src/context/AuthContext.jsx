@@ -174,7 +174,6 @@ export function AuthProvider({ children }) {
     setToken(null);
   }, []);
 
-<<<<<<< HEAD
   const updateProfile = useCallback(
     async (payload) => {
       if (!user || !token) return null;
@@ -224,21 +223,6 @@ export function AuthProvider({ children }) {
     },
     [token]
   );
-=======
-  const updateProfile = useCallback(async (payload) => {
-    if (!user || !token) return null;
-
-    const response = await apiClient.put("/users/profile", payload);
-    const updatedUser = response?.data?.data;
-    if (!updatedUser) {
-      throw new Error("Invalid profile update response from server");
-    }
-
-    saveSession({ token, user: updatedUser });
-    setUser(updatedUser);
-    return updatedUser;
-  }, [token, user]);
->>>>>>> 5d92f019daa869af3ad776687834343031034445
 
   const value = useMemo(
     () => ({
@@ -251,19 +235,12 @@ export function AuthProvider({ children }) {
       register,
       logout,
       updateProfile,
-<<<<<<< HEAD
       changePassword,
       deleteAccount,
       refreshUser,
       extractApiError,
     }),
     [authLoading, login, loginWithGoogle, logout, register, token, updateProfile, changePassword, deleteAccount, refreshUser, user]
-=======
-      refreshUser,
-      extractApiError,
-    }),
-    [authLoading, login, loginWithGoogle, logout, register, token, updateProfile, refreshUser, user],
->>>>>>> 5d92f019daa869af3ad776687834343031034445
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
