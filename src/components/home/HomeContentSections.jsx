@@ -20,7 +20,7 @@ export default function HomeContentSections() {
       try {
         setLoading(true);
         setError(null);
-        
+
         const response = await apiClient.get("/public/home-content");
         const data = response?.data?.data;
 
@@ -62,10 +62,7 @@ export default function HomeContentSections() {
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center">
         <p className="text-lg font-semibold text-red-500">Failed to load content</p>
         <p className="text-sm text-gray-500">{error}</p>
-        <button
-          onClick={() => window.location.reload()}
-          className="rounded-lg bg-cyan-500 px-6 py-2 text-white hover:bg-cyan-600"
-        >
+        <button onClick={() => window.location.reload()} className="rounded-lg bg-cyan-500 px-6 py-2 text-white hover:bg-cyan-600">
           Retry
         </button>
       </div>
@@ -75,10 +72,7 @@ export default function HomeContentSections() {
   // Render with server data
   return (
     <>
-      <HeroSection 
-        heroSlides={content?.heroSlides || []} 
-        counters={content?.counters || []} 
-      />
+      <HeroSection heroSlides={content?.heroSlides || []} counters={content?.counters || []} />
       <TrendingIdeasSection compact />
       <section className="mt-10 grid gap-5 lg:grid-cols-2">
         <WhySection whyItems={content?.whyItems || []} compact className="mt-0" />
