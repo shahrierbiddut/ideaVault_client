@@ -4,8 +4,8 @@ Frontend for IdeaVault, a startup idea sharing platform where users can publish 
 
 ## Live URLs
 
-- Frontend: add your deployed frontend URL
-- Backend API: add your deployed backend URL
+- Frontend: (https://ideavaultclient.vercel.app/)
+- Backend API: (https://ideavaultserver.vercel.app/)
 
 ## Key Features
 
