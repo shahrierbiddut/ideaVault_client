@@ -48,7 +48,7 @@ export function AuthProvider({ children }) {
       setUser(session.user);
       setToken(session.token);
 
-      if (!session.token || session.user) {
+      if (!session.token || !session.user) {
         if (mounted) setAuthLoading(false);
         return;
       }
