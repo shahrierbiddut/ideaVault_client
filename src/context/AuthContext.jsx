@@ -24,6 +24,15 @@ function mapFirebasePopupError(error) {
   return null;
 }
 
+function isProtectedApiPath(pathname = "") {
+  if (!pathname) return false;
+  if (pathname === "/auth/me") return true;
+  if (pathname.startsWith("/users")) return true;
+  if (pathname.startsWith("/interactions")) return true;
+  if (pathname.startsWith("/ideas/my-ideas")) return true;
+  return false;
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
@@ -57,11 +66,15 @@ export function AuthProvider({ children }) {
           setUser(null);
           setToken(null);
         }
-      } catch {
+      } catch (error) {
         if (!mounted) return;
-        clearSession();
-        setUser(null);
-        setToken(null);
+
+        const status = error?.response?.status;
+        if (status === 401 || status === 403) {
+          clearSession();
+          setUser(null);
+          setToken(null);
+        }
       } finally {
         if (mounted) setAuthLoading(false);
       }
@@ -75,9 +88,13 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const onUnauthorized = () => {
+    const onUnauthorized = (event) => {
       const session = getSession();
       if (!session.token) return;
+
+      const requestPath = event?.detail?.requestPath || "";
+      const basePath = requestPath.split("?")[0];
+      if (!isProtectedApiPath(basePath)) return;
 
       clearSession();
       setUser(null);
