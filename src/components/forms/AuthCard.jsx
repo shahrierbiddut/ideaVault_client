@@ -13,7 +13,9 @@ export default function AuthCard({ mode = "login" }) {
   const isLogin = mode === "login";
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("redirect") || "/";
+  const DEFAULT_LOGIN_REDIRECT = "/my-ideas";
+  const redirectTo = isLogin ? DEFAULT_LOGIN_REDIRECT : searchParams.get("redirect") || "/";
+  // const redirectTo = searchParams.get("redirect") || "/";
   const { login, register, loginWithGoogle, extractApiError } = useAuth();
   const [submitting, setSubmitting] = useState(false);
   const [googleSubmitting, setGoogleSubmitting] = useState(false);
@@ -76,12 +78,8 @@ export default function AuthCard({ mode = "login" }) {
           <span className="inline-flex rounded-md border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-500">
             {isLogin ? "Login Page" : "Register Page"}
           </span>
-          <h1 className="text-main mt-5 max-w-sm font-space text-4xl font-semibold leading-tight">
-            {isLogin ? "Welcome Back!" : "Create Your Account"}
-          </h1>
-          <p className="text-subtle mt-4 max-w-sm text-sm leading-6">
-            {isLogin ? "Continue sharing and exploring ideas." : "Join our community of creators and innovators."}
-          </p>
+          <h1 className="text-main mt-5 max-w-sm font-space text-4xl font-semibold leading-tight">{isLogin ? "Welcome Back!" : "Create Your Account"}</h1>
+          <p className="text-subtle mt-4 max-w-sm text-sm leading-6">{isLogin ? "Continue sharing and exploring ideas." : "Join our community of creators and innovators."}</p>
         </div>
 
         <div className="relative z-10 mx-auto flex h-72 w-72 items-center justify-center">
@@ -148,12 +146,7 @@ export default function AuthCard({ mode = "login" }) {
                 <span className="text-subtle text-sm font-medium">Photo URL</span>
                 <span className="relative block">
                   <FiImage className="text-muted pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2" />
-                  <input
-                    placeholder="Enter photo URL"
-                    value={form.photoURL}
-                    onChange={(e) => setForm((p) => ({ ...p, photoURL: e.target.value }))}
-                    className="field h-11 !pl-10"
-                  />
+                  <input placeholder="Enter photo URL" value={form.photoURL} onChange={(e) => setForm((p) => ({ ...p, photoURL: e.target.value }))} className="field h-11 !pl-10" />
                 </span>
               </label>
             ) : null}
@@ -174,8 +167,7 @@ export default function AuthCard({ mode = "login" }) {
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   className="text-muted absolute right-2 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md transition hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)]"
                   type="button"
-                  onClick={() => setShowPassword((value) => !value)}
-                >
+                  onClick={() => setShowPassword((value) => !value)}>
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
               </span>
@@ -195,8 +187,7 @@ export default function AuthCard({ mode = "login" }) {
             className="btn-secondary mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-md text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-70"
             type="button"
             onClick={onGoogleLogin}
-            disabled={googleSubmitting}
-          >
+            disabled={googleSubmitting}>
             <FcGoogle className="text-lg" />
             {googleSubmitting ? "Connecting Google..." : isLogin ? "Login with Google" : "Sign up with Google"}
           </button>
