@@ -3,6 +3,11 @@
 :root {
     --font-body: var(--font-inter), var(--font-poppins), sans-serif;
     --font-display: var(--font-space), var(--font-poppins), sans-serif;
+    --touch-target: 44px;
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --space-section-mobile: 2.5rem;
+    --space-section-desktop: 4rem;
     --radius-sm: 0.6rem;
     --radius-md: 0.85rem;
     --radius-lg: 1.1rem;
@@ -68,6 +73,10 @@ html[data-theme="light"] {
 html,
 body {
     scroll-behavior: smooth;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -249,8 +258,8 @@ body {
 }
 
 .icon-btn {
-    height: 2.25rem;
-    width: 2.25rem;
+    height: var(--touch-target);
+    width: var(--touch-target);
     justify-content: center;
     border: 1px solid var(--border-base);
     background: var(--surface-2);
@@ -384,6 +393,11 @@ summary:focus-visible {
     border-color: var(--border-base);
 }
 
+.touch-target {
+    min-height: var(--touch-target);
+    min-width: var(--touch-target);
+}
+
 .theme-icon-sun,
 .theme-icon-moon {
     position: absolute;
@@ -444,6 +458,28 @@ html[data-theme="light"] .theme-icon-moon {
         rgba(15, 23, 42, 0.7) 50%,
         rgba(15, 23, 42, 0.4) 100%
     );
+}
+
+@media (max-width: 639px) {
+    .section-pad {
+        padding-top: var(--space-section-mobile);
+        padding-bottom: var(--space-section-mobile);
+    }
+}
+
+@media (min-width: 640px) {
+    .section-pad {
+        padding-top: var(--space-section-desktop);
+        padding-bottom: var(--space-section-desktop);
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    button,
+    a,
+    [role="button"] {
+        min-height: var(--touch-target);
+    }
 }
 
 html[data-theme="light"] .hero-image-overlay {
