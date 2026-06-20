@@ -29,7 +29,7 @@ function BrandMark({ compact = false }) {
       >
         <span className="relative">Q</span>
       </span>
-      <span className={cn("font-space text-main truncate font-semibold", compact ? "hidden text-lg sm:inline" : "text-2xl")}>IdeaVault</span>
+      <span className={cn("font-space text-main truncate font-semibold", compact ? "hidden text-base sm:inline" : "text-xl sm:text-2xl")}>IdeaVault</span>
     </Link>
   );
 }
@@ -142,10 +142,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="surface-elevated mx-auto flex h-14 w-[min(1180px,92%)] items-center rounded-xl px-3 md:hidden">
+      <div className="surface-elevated mx-auto flex h-16 w-[min(1180px,92%)] items-center rounded-xl px-3 md:hidden">
         <div className="flex items-center gap-2">
           <button
-            className="icon-btn h-8 w-8 rounded-md"
+            className="icon-btn rounded-md"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label="Menu"
             type="button"
@@ -181,7 +181,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="surface-elevated mx-auto mt-2 w-[min(1180px,92%)] rounded-xl p-3 md:hidden"
+            className="surface-elevated mx-auto mt-2 w-[min(1180px,92%)] rounded-xl p-2 md:hidden"
           >
             <div className="space-y-2">
               {visibleLinks.map((link) => (
