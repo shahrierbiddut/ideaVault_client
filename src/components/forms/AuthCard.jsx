@@ -14,7 +14,7 @@ export default function AuthCard({ mode = "login" }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const DEFAULT_LOGIN_REDIRECT = "/my-ideas";
-  const redirectTo = isLogin ? DEFAULT_LOGIN_REDIRECT : searchParams.get("redirect") || "/";
+  const redirectTo = searchParams.get("redirect") || DEFAULT_LOGIN_REDIRECT;
   // const redirectTo = searchParams.get("redirect") || "/";
   const { login, register, loginWithGoogle, extractApiError } = useAuth();
   const [submitting, setSubmitting] = useState(false);
@@ -39,7 +39,8 @@ export default function AuthCard({ mode = "login" }) {
       setGoogleSubmitting(true);
       await loginWithGoogle();
       toast.success("Google login successful");
-      router.push(redirectTo);
+      // router.push(redirectTo);
+      window.location.replace(redirectTo);
     } catch (error) {
       toast.error(extractApiError(error, "Google login failed"));
     } finally {
@@ -62,7 +63,8 @@ export default function AuthCard({ mode = "login" }) {
         await register(form);
       }
       toast.success(isLogin ? "Welcome back to IdeaVault" : "Account created successfully");
-      router.push(redirectTo);
+      // router.push(redirectTo);
+      window.location.replace(redirectTo);
     } catch (error) {
       toast.error(extractApiError(error, isLogin ? "Login failed" : "Registration failed"));
     } finally {

@@ -13,6 +13,18 @@ export default function HomeContentSections() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const loadHomeContentViaProxy = async () => {
+    const fallbackResponse = await fetch("/api/public/home-content", { cache: "no-store" });
+    const fallbackPayload = await fallbackResponse.json().catch(() => null);
+
+    if (!fallbackResponse.ok) {
+      const proxyError = fallbackPayload?.error || fallbackPayload?.message || "Proxy fallback failed";
+      throw new Error(proxyError);
+    }
+
+    return fallbackPayload?.data;
+  };
+
   useEffect(() => {
     let mounted = true;
 
@@ -21,8 +33,20 @@ export default function HomeContentSections() {
         setLoading(true);
         setError(null);
 
-        const response = await apiClient.get("/public/home-content");
-        const data = response?.data?.data;
+        let data = null;
+
+        try {
+          const response = await apiClient.get("/public/home-content");
+          data = response?.data?.data;
+        } catch (directError) {
+          const isNetworkOrCors = directError?.message === "Network Error" || !directError?.response;
+          if (!isNetworkOrCors) {
+            throw directError;
+          }
+
+          console.warn("Primary API request failed. Retrying via local proxy endpoint.", directError);
+          data = await loadHomeContentViaProxy();
+        }
 
         if (!mounted) return;
 
