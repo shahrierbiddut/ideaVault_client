@@ -57,13 +57,13 @@ export default function Footer() {
   return (
     <footer className="mt-16 pb-6">
       <div className="surface-elevated mx-auto w-[min(1180px,92%)] overflow-hidden rounded-2xl">
-        <div className="grid gap-8 px-6 py-8 md:px-8 lg:grid-cols-[1.35fr_1fr_1fr_1fr_1.1fr]">
+        <div className="grid grid-cols-1 gap-8 px-5 py-8 sm:grid-cols-2 sm:px-6 md:px-8 lg:grid-cols-[1.35fr_1fr_1fr_1fr_1.1fr]">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-cyan-400 text-sm font-bold text-white">
                 Q
               </span>
-              <h3 className="font-space text-main text-3xl font-semibold">IdeaVault</h3>
+              <h3 className="font-space text-main text-2xl sm:text-3xl font-semibold">IdeaVault</h3>
             </div>
             <p className="text-subtle max-w-sm text-sm leading-relaxed">
               A platform for innovators to share ideas, collaborate and build the future together.
@@ -103,7 +103,7 @@ export default function Footer() {
           <div className="space-y-3">
             <h4 className="font-space text-main text-lg font-semibold">Contact</h4>
             <ul className="text-subtle space-y-3 text-sm">
-              <li className="inline-flex items-center gap-2">
+              <li className="inline-flex max-w-full items-start gap-2 break-all">
                 <FiMail className="text-cyan-500" />
                 <span>shahrierhossainbiddut@gmail.com</span>
               </li>
